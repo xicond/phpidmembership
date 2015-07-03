@@ -56,7 +56,7 @@ $requirements = array(
         'condition' => extension_loaded('pdo'),
         'by' => 'All DB-related classes',
     ),
-    array(
+    /*array(
         'name' => 'PDO SQLite extension',
         'mandatory' => false,
         'condition' => extension_loaded('pdo_sqlite'),
@@ -70,9 +70,10 @@ $requirements = array(
         'by' => 'All DB-related classes',
         'memo' => 'Required for MySQL database.',
     ),
+	*/
     array(
         'name' => 'PDO PostgreSQL extension',
-        'mandatory' => false,
+        'mandatory' => true,
         'condition' => extension_loaded('pdo_pgsql'),
         'by' => 'All DB-related classes',
         'memo' => 'Required for PostgreSQL database.',
