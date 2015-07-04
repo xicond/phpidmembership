@@ -10,12 +10,14 @@ Installation
    ```
    php requirements.php 
    ```
+   Pastikan PDO PostgreSQL extension dengan status OK, Jika masih warning dapat mengaktifkan extension PDO PostgreSQL melalui file php.ini .
+
 ## Installing using Composer
 
 Setelah composer di install, jalankan perintah berikut di command prompt:
 
     composer global require "fxp/composer-asset-plugin:~1.0.0"
-    composer create-project --prefer-dist yiisoft/yii2-app-advanced yii-application
+    composer install
 
 ## Preparing application
 
