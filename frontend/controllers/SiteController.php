@@ -28,11 +28,15 @@ class SiteController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
+                        'actions' => ['signup'],
+                        'allow' => false,
+                    ],
+                    [
                         'actions' => ['error'],
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['signup','login'],
+                        'actions' => ['login'],
                         'allow' => true,
                         'roles' => ['?'],
                     ],
@@ -91,11 +95,19 @@ class SiteController extends Controller
         }
 
         $model = new LoginForm();
+        $signupModel = new SignupForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
+        } elseif ($signupModel->load(Yii::$app->request->post())) {
+            if ($user = $signupModel->signup()) {
+                if (Yii::$app->getUser()->login($user)) {
+                    return $this->goHome();
+                }
+            }
         } else {
             return $this->render('login', [
                 'model' => $model,
+                'signupModel' => $signupModel
             ]);
         }
     }
