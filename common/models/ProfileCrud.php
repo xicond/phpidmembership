@@ -3,7 +3,6 @@
 namespace common\models;
 
 use yii\db\Expression;
-use yii\behaviors\TimestampBehavior;
 use common\models\Profile;
 
 class ProfileCrud extends Profile
@@ -12,7 +11,7 @@ class ProfileCrud extends Profile
     {
          return [
             [
-                'class' => TimestampBehavior::className(),
+                'class' => 'yii\behaviors\TimestampBehavior',
                 'value' => new Expression('NOW()'),
             ],
             'yii\behaviors\BlameableBehavior'

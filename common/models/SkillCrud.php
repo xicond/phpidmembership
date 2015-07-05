@@ -3,7 +3,6 @@
 namespace common\models;
 
 use yii\db\Expression;
-use yii\behaviors\TimestampBehavior;
 use common\models\Skill;
 
 class SkillCrud extends Skill
@@ -12,7 +11,7 @@ class SkillCrud extends Skill
     {
          return [
             [
-                'class' => TimestampBehavior::className(),
+                'class' => 'yii\behaviors\TimestampBehavior',
                 'value' => new Expression('NOW()'),
             ],
             'yii\behaviors\BlameableBehavior'

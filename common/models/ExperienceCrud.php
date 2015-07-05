@@ -4,7 +4,6 @@ namespace common\models;
 
 use Yii;
 use yii\db\Expression;
-use yii\behaviors\TimestampBehavior;
 use common\models\Experience;
 
 class ExperienceCrud extends Experience
@@ -13,7 +12,7 @@ class ExperienceCrud extends Experience
     {
          return [
             [
-                'class' => TimestampBehavior::className(),
+                'class' => 'yii\behaviors\TimestampBehavior',
                 'value' => new Expression('NOW()'),
             ],
             'yii\behaviors\BlameableBehavior'
