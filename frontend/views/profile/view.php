@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $profile->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Update', ['update-profile', 'id' => Yii::$app->user->getId()], ['class' => 'btn btn-primary']) ?>
     </p>
 
     <?= DetailView::widget([
@@ -22,6 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'fullname',
             'email:email',
+            'gender',
             'phone',
             'address',
             'province',

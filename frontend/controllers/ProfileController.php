@@ -2,11 +2,14 @@
 
 namespace frontend\controllers;
 
+use common\models\ProfileCrud;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use common\models\Profile;
+use yii\web\Response;
+use yii\widgets\ActiveForm;
+
 
 /**
  * ProfileController shows users profiles.
@@ -25,7 +28,7 @@ class ProfileController extends Controller
             'access' => [
                 'class' => AccessControl::className(),
                 'rules' => [
-                    ['allow' => true, 'actions' => ['index'], 'roles' => ['@']],
+                    ['allow' => true, 'actions' => ['index','update-profile'], 'roles' => ['@']],
                     ['allow' => true, 'actions' => ['show'], 'roles' => ['?', '@']],
                 ],
             ],
@@ -64,6 +67,31 @@ class ProfileController extends Controller
     }
 
     /**
+     * Updates an existing profile.
+     *
+     * @param int $id
+     *
+     * @return mixed
+     */
+    public function actionUpdateProfile($id)
+    {
+        
+        $profile    = $this->findProfileByUserId($id);
+        
+        $this->performAjaxValidation($profile);
+
+        if ($profile->load(Yii::$app->request->post()) && $profile->save()) {
+            Yii::$app->getSession()->setFlash('success', 'Profile details have been updated');
+
+            return $this->refresh();
+        }
+
+        return $this->render('_form', [
+            'profile' => $profile,
+        ]);
+    }
+
+    /**
      * [findProfileByUserId description]
      * @param  [type] $id [description]
      * @return [type]     [description]
@@ -71,10 +99,30 @@ class ProfileController extends Controller
     
     protected function findProfileByUserId($id)
     {
-        if (($model = Profile::find($id)->where(['user_id' => $id])->andWhere(['created_by' => $id])->one()) !== null) {
+        if (($model = ProfileCrud::find($id)->where(['user_id' => $id])->andWhere(['created_by' => $id])->one()) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    /**
+     * Performs AJAX validation.
+     *
+     * @param array|Model $model
+     *
+     * @throws ExitException
+     */
+    protected function performAjaxValidation($model)
+    {
+        if (Yii::$app->request->isAjax && !Yii::$app->request->isPjax) {
+            if ($model->load(Yii::$app->request->post())) {
+                Yii::$app->response->format = Response::FORMAT_JSON;
+                echo json_encode(ActiveForm::validate($model));
+                Yii::$app->end();
+            }
+        }
+    }
+
+
 }
