@@ -13,8 +13,8 @@ class ProfileCrud extends Profile
     public function behaviors()
     {
          return [
-            'phpid\behaviors\AutoTimestamp',
-            'phpid\behaviors\AutoUser',
+            'common\component\behaviors\AutoTimestamp',
+            'common\component\behaviors\AutoUser',
         ];
     }
     
