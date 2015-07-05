@@ -3,6 +3,7 @@ namespace frontend\controllers;
 
 use Yii;
 use common\models\LoginForm;
+use common\models\ProfileCrud;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
@@ -101,8 +102,13 @@ class SiteController extends Controller
         } elseif ($signupModel->load(Yii::$app->request->post())) {
             if ($user = $signupModel->signup()) {
                 if (Yii::$app->getUser()->login($user)) {
+                    $profile = new ProfileCrud();
+                    $profile->user_id = $user->id;
+                    $profile->fullname = $user->username;
+                    $profile->email = $user->email;
+                    $profile->save();
                     return $this->goHome();
-                }
+                }  
             }
         } else {
             return $this->render('login', [
