@@ -10,6 +10,7 @@ use Yii;
  * @property integer $id
  * @property integer $user_id
  * @property string $fullname
+ * @property string $gender
  * @property string $email
  * @property string $phone
  * @property string $address
@@ -45,6 +46,7 @@ class Profile extends \yii\db\ActiveRecord
             [['user_id', 'province', 'city', 'district', 'subdistrict', 'created_by', 'updated_by'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['fullname', 'email', 'phone'], 'string', 'max' => 150],
+            [['gender'], 'string', 'max' => 255],
             [['address'], 'string', 'max' => 250],
             [['postcode'], 'string', 'max' => 6],
             [['user_id'], 'unique']
@@ -60,6 +62,7 @@ class Profile extends \yii\db\ActiveRecord
             'id' => 'ID',
             'user_id' => 'User ID',
             'fullname' => 'Fullname',
+            'gender' => 'Gender',
             'email' => 'Email',
             'phone' => 'Phone',
             'address' => 'Address',
