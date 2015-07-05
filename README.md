@@ -58,6 +58,7 @@ the installed application. You only need to do these once for all.
 Progress Summary
 ----------------
 ### Database design & Models
+*Milestone: 1.0 Initiation version - http://git.io/vq3Ta
 1. users
 2. profiles
 3. educations
@@ -66,4 +67,4 @@ Progress Summary
 5. portfolios
 
 ### Pages / Area / Feature
-1. Page to show a member's basic profile
+1. Page to show a member's basic profile (*Milestone: 1.0 Initiation version - http://git.io/vq3Ta)
