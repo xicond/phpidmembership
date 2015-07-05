@@ -54,3 +54,18 @@ the installed application. You only need to do these once for all.
 4. Set document roots of your web server:
 
    Lihat di : https://github.com/yiisoft/yii2-app-advanced/blob/master/docs/guide/start-installation.md
+   
+Progress Summary
+----------------
+### Database design & Models
+1.0 Initiation version - http://git.io/vq3Ta
+
+1. users
+2. profiles
+3. educations
+3. skills
+4. experiences
+5. portfolios
+
+### Pages / Area / Feature
+1. Page to show a member's basic profile (1.0 Initiation version - http://git.io/vq3Ta)
