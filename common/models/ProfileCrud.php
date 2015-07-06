@@ -2,19 +2,19 @@
 
 namespace common\models;
 
-use Yii;
 use yii\db\Expression;
-use yii\db\ActiveRecord;
 use common\models\Profile;
-use yii\db\Query;
 
 class ProfileCrud extends Profile
 {
     public function behaviors()
     {
          return [
-            'phpid\behaviors\AutoTimestamp',
-            'phpid\behaviors\AutoUser',
+            [
+                'class' => 'yii\behaviors\TimestampBehavior',
+                'value' => new Expression('NOW()'),
+            ],
+            'yii\behaviors\BlameableBehavior'
         ];
     }
     
@@ -26,15 +26,16 @@ class ProfileCrud extends Profile
         return [
             'id' => 'ID',
             'user_id' => 'User ID',
-            'fullname' => 'Fullname',
+            'fullname' => 'Nama Lengkap',
+            'gender' => 'Jenis Kelamin',
             'email' => 'Email',
-            'phone' => 'Phone',
-            'address' => 'Address',
-            'province' => 'Province',
-            'city' => 'City',
-            'district' => 'District',
-            'subdistrict' => 'Subdistrict',
-            'postcode' => 'Postcode',
+            'phone' => 'Telepon',
+            'address' => 'Alamat',
+            'province' => 'Propinsi',
+            'city' => 'Kota',
+            'district' => 'Kelurahan',
+            'subdistrict' => 'Kecamatan',
+            'postcode' => 'Kode Pos',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
             'created_by' => 'Created By',
