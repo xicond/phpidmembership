@@ -67,7 +67,7 @@ class ProfileController extends Controller
     }
 
     /**
-     * Updates an existing profile.
+     * Updates an existing profile. 
      *
      * @param int $id
      *
@@ -76,13 +76,25 @@ class ProfileController extends Controller
     public function actionUpdateProfile($id)
     {
         
-        $profile    = $this->findProfileByUserId($id);
-        
+        $profile = $this->findProfileByUserId($id);
+        $profile->scenario = 'update';
         $this->performAjaxValidation($profile);
 
-        if ($profile->load(Yii::$app->request->post()) && $profile->save()) {
-            Yii::$app->getSession()->setFlash('success', 'Profile details have been updated');
+        if ($profile->load(Yii::$app->request->post())) {
 
+            //$user_email = Yii::$app->user->identity->email;
+            if($profile->isAttributeChanged('email')){
+                if ($profile->sendEmail($profile->email,2,$profile->user_id)) {
+                        Yii::$app->getSession()->setFlash('success', 'Profile berhasil diperbaharui, Mohon Lakukan verifikasi untuk alamat email baru anda.');
+                    } else {
+                        Yii::$app->session->setFlash('error', 'Maaf, kami tidak dapat mengirimkan email verifikasi untuk anda.');
+                    }
+            }
+            $profile->save();
+
+            
+            Yii::$app->getSession()->setFlash('success', 'Profile berhasil diperbaharui.');
+            
             return $this->refresh();
         }
 

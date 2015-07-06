@@ -21,8 +21,15 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $profile,
         'attributes' => [
             'fullname',
-            'email:email',
-            'gender',
+            [
+                'attribute'=>'email',
+                'format'=>'raw',
+                'value'=>$profile->statusVerified($profile->user_id)
+            ],
+            [
+                'attribute'=>'gender',
+                'value'=> ($profile->gender == 1) ? 'Laki-Laki' : (($profile->gender == 2) ? 'Perempuan' : '')
+            ],
             'phone',
             'address',
             'province',
