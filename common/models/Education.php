@@ -81,4 +81,19 @@ class Education extends \yii\db\ActiveRecord
     {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
+    
+    public static function getListGraduateStatus()
+    {
+    	return [
+    			1 => 'Lulus',
+    			2 => 'Belum Lulus',
+    			3 => 'Drop Out'
+    	];
+    }
+    
+    public static function getGraduateStatusName($id)
+    {
+    	$data = self::getListGraduateStatus();
+    	return $data[$id];
+    }
 }
