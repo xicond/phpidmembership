@@ -20,7 +20,7 @@ class m150705_213740_create_province_table extends Migration
                 'updated_by' => Schema::TYPE_INTEGER . ' NULL',
             ], $tableOptions
         );
-        
+
         $this->insert('ref_province', ['id'=>11,'name'=>'Aceh']);
         $this->insert('ref_province', ['id'=>12,'name'=>'Sumatera Utara']);
         $this->insert('ref_province', ['id'=>13,'name'=>'Sumatera Barat']);

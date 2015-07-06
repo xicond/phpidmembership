@@ -21,7 +21,7 @@ class m150705_213801_create_city_table extends Migration
                 'updated_by' => Schema::TYPE_INTEGER . ' NULL',
             ], $tableOptions
         );
-        
+
         $this->insert('ref_city', ['id'=>1101, 'province_id'=>11, 'name'=>'Simeulue']);
         $this->insert('ref_city', ['id'=>1102, 'province_id'=>11, 'name'=>'Aceh Singkil']);
         $this->insert('ref_city', ['id'=>1103, 'province_id'=>11, 'name'=>'Aceh Selatan']);

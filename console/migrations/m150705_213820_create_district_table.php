@@ -23,7 +23,7 @@ class m150705_213820_create_district_table extends Migration
                 'updated_by' => Schema::TYPE_INTEGER . ' NULL',
             ], $tableOptions
         );
-        
+
         $this->insert('ref_district', ['id'=>1101010,'city_id'=>1101,'name'=>'Teupah Selatan']);
         $this->insert('ref_district', ['id'=>1101020,'city_id'=>1101,'name'=>'Simeulue Timur']);
         $this->insert('ref_district', ['id'=>1101021,'city_id'=>1101,'name'=>'Teupah Barat']);
