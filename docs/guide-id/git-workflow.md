@@ -91,7 +91,7 @@ Masuk ke repository anda di GitHub kemudian klik `Pull Request`. Pilih branch da
 
 ### 11. Seseorang akan mereview code anda.
 
-Seseorang akan mereview code anda. Menanyakan sesuatu, meminta perubahan dan lain-lain. Lakukan langkah 5 (anda tidak perlu membuat "pull request" yang baru). Jika code anda diterima, ia akan dimerge dan menjadi bagian dari SangkilBiz. Jika ditolak, jangan berkecil hati, tiap orang punya pertimbangannya masing-masing :D.
+Seseorang akan mereview code anda. Menanyakan sesuatu, meminta perubahan dan lain-lain. Lakukan langkah 5 (anda tidak perlu membuat "pull request" yang baru). Jika code anda diterima, ia akan dimerge dan menjadi bagian dari phpindonesia.or.id-membership. Jika ditolak, jangan berkecil hati, tiap orang punya pertimbangannya masing-masing :D.
 
 ### 12. Bersihkan.
 
