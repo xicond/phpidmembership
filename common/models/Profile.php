@@ -10,7 +10,7 @@ use Yii;
  * @property integer $id
  * @property integer $user_id
  * @property string $fullname
- * @property string $gender
+ * @property integer $gender
  * @property string $email
  * @property string $phone
  * @property string $address
@@ -43,10 +43,10 @@ class Profile extends \yii\db\ActiveRecord
     {
         return [
             [['user_id', 'fullname', 'email'], 'required'],
-            [['user_id', 'province', 'city', 'district', 'subdistrict', 'created_by', 'updated_by'], 'integer'],
+            [['user_id', 'province', 'gender','city', 'district', 'subdistrict', 'created_by', 'updated_by'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['fullname', 'email', 'phone'], 'string', 'max' => 150],
-            [['gender'], 'string', 'max' => 255],
+            [['gender'], 'integer', 'max' => 255],
             [['address'], 'string', 'max' => 250],
             [['postcode'], 'string', 'max' => 6],
             [['user_id'], 'unique']

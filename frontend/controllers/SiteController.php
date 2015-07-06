@@ -8,6 +8,7 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use frontend\models\VerificationEmailForm;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
@@ -37,12 +38,12 @@ class SiteController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['login'],
+                        'actions' => ['login','verification-email'],
                         'allow' => true,
                         'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['index','logout'],
+                        'actions' => ['index','logout','verification-email'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -102,11 +103,20 @@ class SiteController extends Controller
         } elseif ($signupModel->load(Yii::$app->request->post())) {
             if ($user = $signupModel->signup()) {
                 if (Yii::$app->getUser()->login($user)) {
+
                     $profile = new ProfileCrud();
+                    $profile->scenario = 'signup';
                     $profile->user_id = $user->id;
                     $profile->fullname = $user->username;
-                    $profile->email = $user->email;
+                    $profile->email = ' ';
                     $profile->save();
+                    
+                    if ($profile->sendEmail($user->email,1)) {
+                        Yii::$app->session->setFlash('success', 'Hi '.$user->username.', selamat bergabung. Mohon lakukan verifikasi email dan lengkapi profile anda. ');
+                    } else {
+                        Yii::$app->session->setFlash('error', 'Maaf, kami tidak dapat mengirimkan email verifikasi untuk anda.');
+                    }
+
                     return $this->goHome();
                 }  
             }
@@ -231,5 +241,28 @@ class SiteController extends Controller
         return $this->render('resetPassword', [
             'model' => $model,
         ]);
+    }
+
+    /**
+     * Verification Email.
+     *
+     * @param string $token
+     * @return mixed
+     * @throws BadRequestHttpException
+     */
+    public function actionVerificationEmail($token,$req)
+    {
+        try {
+
+            $model = new VerificationEmailForm($token);
+            if($model->verificationEmail($req)){
+                Yii::$app->session->setFlash('success', 'Verification Email Berhasil.');
+                return $this->goHome();
+            }
+
+        } catch (InvalidParamException $e) {
+            throw new BadRequestHttpException($e->getMessage());
+        }
+
     }
 }
