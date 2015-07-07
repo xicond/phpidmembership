@@ -30,20 +30,16 @@ class SiteController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['signup'],
-                        'allow' => false,
-                    ],
-                    [
-                        'actions' => ['error'],
+                        'actions' => ['error','verification-email'],
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['login','verification-email'],
+                        'actions' => ['login','signup'],
                         'allow' => true,
                         'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['index','logout','verification-email'],
+                        'actions' => ['index','logout'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -100,26 +96,6 @@ class SiteController extends Controller
         $signupModel = new SignupForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
-        } elseif ($signupModel->load(Yii::$app->request->post())) {
-            if ($user = $signupModel->signup()) {
-                if (Yii::$app->getUser()->login($user)) {
-
-                    $profile = new ProfileCrud();
-                    $profile->scenario = 'signup';
-                    $profile->user_id = $user->id;
-                    $profile->fullname = $user->username;
-                    $profile->email = ' ';
-                    $profile->save();
-                    
-                    if ($profile->sendEmail($user->email,1)) {
-                        Yii::$app->session->setFlash('success', 'Hi '.$user->username.', selamat bergabung. Mohon lakukan verifikasi email dan lengkapi profile anda. ');
-                    } else {
-                        Yii::$app->session->setFlash('error', 'Maaf, kami tidak dapat mengirimkan email verifikasi untuk anda.');
-                    }
-
-                    return $this->goHome();
-                }  
-            }
         } else {
             return $this->render('login', [
                 'model' => $model,
@@ -180,17 +156,33 @@ class SiteController extends Controller
      */
     public function actionSignup()
     {
-        $model = new SignupForm();
-        if ($model->load(Yii::$app->request->post())) {
-            if ($user = $model->signup()) {
+        $model = new LoginForm();
+        $signupModel = new SignupForm();
+        if ($signupModel->load(Yii::$app->request->post())) {
+            if ($user = $signupModel->signup()) {
                 if (Yii::$app->getUser()->login($user)) {
+                    
+                    $profile = new ProfileCrud();
+                    $profile->scenario = 'signup';
+                    $profile->user_id = $user->id;
+                    $profile->fullname = $user->username;
+                    $profile->email = ' ';
+                    $profile->save();
+                    
+                    if ($profile->sendEmail($user->email,1)) {
+                        Yii::$app->session->setFlash('success', 'Hi '.$user->username.', selamat bergabung. Mohon lakukan verifikasi email dan lengkapi profile anda. ');
+                    } else {
+                        Yii::$app->session->setFlash('error', 'Maaf, kami tidak dapat mengirimkan email verifikasi untuk anda.');
+                    }
+                    
                     return $this->goHome();
                 }
             }
         }
 
-        return $this->render('signup', [
+        return $this->render('login', [
             'model' => $model,
+            'signupModel' => $signupModel
         ]);
     }
 

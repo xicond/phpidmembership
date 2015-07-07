@@ -26,7 +26,7 @@ $this->title = 'Login';
                 </div>
             <?php ActiveForm::end(); ?>
             
-            <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
+            <?php $form = ActiveForm::begin(['id' => 'form-signup','action'=>['site/signup']]); ?>
                 <?= $form->field($signupModel, 'username') ?>
                 <?= $form->field($signupModel, 'email') ?>
                 <?= $form->field($signupModel, 'password')->passwordInput() ?>
