@@ -1,6 +1,18 @@
 Membership
 ===============================
 
+Kontribusi
+-----------
+Jika anda ingin berkontribusi dalam pembangunan aplikasi ini, berikut langkah-langkahnya : 
+
+1. Fork repository ini dan ikuti [Panduan Penggunaan Git](docs/guide-id/git-workflow.md).
+   Ikuti langkah-langkah instalasi dan test runing aplikasi ini, pastikan berjalan dengan baik.
+
+2. Lihat [Sitemap dan Design Pattern Aplikasi](docs/guide-id/app-design-pattern.md)
+   dan tentukan bagian yang akan ditangani / di-pick dengan membuat issue akan mempick bagian itu
+   untuk meminimkan konflik.
+
+
 Installation
 -------------
 
@@ -51,17 +63,12 @@ the installed application. You only need to do these once for all.
 
 3. Jalankan console command `yii migrate`.
 
-4. Set document roots of your web server:
+4. Setting document roots dari web server anda :
 
-   Lihat di : https://github.com/yiisoft/yii2-app-advanced/blob/master/docs/guide/start-installation.md
+   Lihat di : [Panduan Instalasi](docs/guide/start-installation.md)
 
 5. Lakukan konfigurasi username dan password email anda pada file `common\config\main-local.php`
    
-## Kontribusi
-
-Silakan ikuti link [berikut](docs/guide-id/git-workflow.md).
-
-
 Progress Summary
 ----------------
 ### Database design & Models
