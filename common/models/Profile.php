@@ -23,6 +23,7 @@ use Yii;
  * @property string $updated_at
  * @property integer $created_by
  * @property integer $updated_by
+ * @property integer $photo_id
  *
  * @property User $user
  */
@@ -43,10 +44,9 @@ class Profile extends \yii\db\ActiveRecord
     {
         return [
             [['user_id', 'fullname', 'email'], 'required'],
-            [['user_id', 'province', 'gender','city', 'district', 'subdistrict', 'created_by', 'updated_by'], 'integer'],
+            [['user_id', 'gender', 'province', 'city', 'district', 'subdistrict', 'created_by', 'updated_by', 'photo_id'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['fullname', 'email', 'phone'], 'string', 'max' => 150],
-            [['gender'], 'integer', 'max' => 255],
             [['address'], 'string', 'max' => 250],
             [['postcode'], 'string', 'max' => 6],
             [['user_id'], 'unique']
@@ -75,6 +75,7 @@ class Profile extends \yii\db\ActiveRecord
             'updated_at' => 'Updated At',
             'created_by' => 'Created By',
             'updated_by' => 'Updated By',
+            'photo_id' => 'Photo ID',
         ];
     }
 
