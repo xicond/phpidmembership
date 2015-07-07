@@ -9,4 +9,4 @@ Initial Release
 - Enh #3 : Member's basic profile manager (Update profile). (Henry)
 - Enh #13: Add feature for submit educations data. (R Awaludin)
 - Chg: Exclude `.htaccess` from commit. (mdmunir)
-- Bug #17: Inject data to profile. (R Awaludin)
+- Bug #17: Inject data to profile. (Henry)
