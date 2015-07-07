@@ -33,7 +33,7 @@ class ProfileCrud extends Profile
             [['gender'], 'integer', 'max' => 255],
             [['address'], 'string', 'max' => 250],
             [['postcode'], 'string', 'max' => 6],
-            [['user_id','email'], 'unique'],
+            [['user_id','email'], 'unique','on' => 'update'],
             [['email'], 'email','on' => 'update'],
             [['user_id', 'fullname'], 'required', 'on' => 'signup'],
 
