@@ -63,6 +63,8 @@ Silakan ikuti link [berikut](docs/guide-id/git-workflow.md).
 Progress Summary
 ----------------
 ### Database design & Models
+* [ERD](docs/guide-id/app-database-erd.md)
+
 1.0 Initiation version - http://git.io/vq3Ta
 
 1. users
