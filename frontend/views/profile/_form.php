@@ -32,10 +32,25 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
                     <?= $form->field($profile, 'fullname')->textInput(['maxlength' => true]) ?>
+                    
+                    <? if(trim($profile->email) != ""){
+                        echo $form->field($profile, 'email')->textInput(['maxlength' => true]);
+                    }else{
+                    ?>
+                        <div class="form-group field-profilecrud-email">
+                            <label class="control-label col-sm-3" for="profilecrud-email">Email</label>
+                            <div class="col-sm-9">
+                    <?
+                                echo $profile->email . '<span class="label label-warning">Not Verified</span>';
+                    ?>
+                            </div>
+                        </div>
+                    <?    
+                    }
+                    ?>
+                    
 
-                    <?= $form->field($profile, 'email')->textInput(['maxlength' => true]) ?>
-
-                    <?= $form->field($profile, 'gender')->radioList(['Laki-Laki'=>'Laki-Laki','Perempuan'=>'Perempuan']) ?>
+                    <?= $form->field($profile, 'gender')->radioList([1=>'Laki-Laki',2=>'Perempuan']) ?>
 
                     <?= $form->field($profile, 'phone')->textInput(['maxlength' => true]) ?>
 
