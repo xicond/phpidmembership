@@ -54,6 +54,8 @@ the installed application. You only need to do these once for all.
 4. Set document roots of your web server:
 
    Lihat di : https://github.com/yiisoft/yii2-app-advanced/blob/master/docs/guide/start-installation.md
+
+5. Lakukan konfigurasi username dan password email anda pada file `common\config\main-local.php`
    
 ## Kontribusi
 
