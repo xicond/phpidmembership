@@ -41,8 +41,11 @@ AppAsset::register($this);
                 $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
                 $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
             } else {
-                $menuItems[] = ['label' => 'Profile', 'url' => ['/profile/index']];
-                $menuItems[] = ['label' => 'Educations', 'url' => ['/education/index']];
+                $menuItems[] = ['label' => 'Profil', 'url' => ['/profile/index']];
+                $menuItems[] = ['label' => 'Pendidikan', 'url' => ['/education/index']];
+                $menuItems[] = ['label' => 'Pengalaman', 'url' => ['/experience/index']];
+                $menuItems[] = ['label' => 'Keahlian', 'url' => ['/skill/index']];
+                $menuItems[] = ['label' => 'Portofolio', 'url' => ['/portofolio/index']];
                 $menuItems[] = [
                     'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
                     'url' => ['/site/logout'],
