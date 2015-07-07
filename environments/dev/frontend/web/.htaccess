@@ -1,5 +1,7 @@
 # use mod_rewrite for pretty URL support
 RewriteEngine on
+# Remark jika memakai directory alias seperti localhost/membership
+#RewriteBase /membership
 # If a directory or a file exists, use the request directly
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
