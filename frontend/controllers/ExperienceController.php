@@ -3,11 +3,12 @@
 namespace frontend\controllers;
 
 use Yii;
-use common\models\Experience;
+use common\models\ExperienceCrud;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use common\components\helpers\DateConverter;
 
 /**
  * ExperienceController implements the CRUD actions for Experience model.
@@ -33,7 +34,7 @@ class ExperienceController extends Controller
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Experience::find(),
+            'query' => ExperienceCrud::find(),
         ]);
 
         return $this->render('index', [
@@ -60,10 +61,22 @@ class ExperienceController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Experience();
+        $model = new ExperienceCrud();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->user_id = Yii::$app->user->identity->id;
+            
+            if($model->start_date){
+               $model->start_date =  DateConverter::convert($model->start_date);
+            }
+            
+            if($model->end_date){
+               $model->end_date =  DateConverter::convert($model->end_date);
+            }
+            
+            $model->save();
+            
+            return $this->redirect(['index']);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -82,7 +95,8 @@ class ExperienceController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
+            //return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -112,7 +126,7 @@ class ExperienceController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = Experience::findOne($id)) !== null) {
+        if (($model = ExperienceCrud::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

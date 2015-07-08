@@ -12,25 +12,15 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'user_id')->textInput() ?>
-
     <?= $form->field($model, 'company_name')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'position')->textInput() ?>
 
-    <?= $form->field($model, 'start_date')->textInput() ?>
+    <?= $form->field($model, 'start_date')->widget(\yii\widgets\MaskedInput::className(), ['mask' => '99-99-9999', 'type' => 'date','options'=>['value'=>date('d-m-Y',strtotime($model->start_date)),'class'=>'form-control']]) ?>
 
-    <?= $form->field($model, 'end_date')->textInput() ?>
+    <?= $form->field($model, 'end_date')->widget(\yii\widgets\MaskedInput::className(), ['mask' => '99-99-9999', 'type' => 'date','options'=>['value'=>date('d-m-Y',strtotime($model->end_date)),'class'=>'form-control']]) ?>
 
     <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
-
-    <?= $form->field($model, 'created_at')->textInput() ?>
-
-    <?= $form->field($model, 'updated_at')->textInput() ?>
-
-    <?= $form->field($model, 'created_by')->textInput() ?>
-
-    <?= $form->field($model, 'updated_by')->textInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
