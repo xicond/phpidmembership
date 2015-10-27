@@ -26,9 +26,15 @@ Installation
 
 ## Installing using Composer
 
-Setelah composer di install, jalankan perintah berikut di command prompt:
+Pastikan git command line ter-install
 
-    composer global require "fxp/composer-asset-plugin:~1.0.0"
+    jika ditanya token : https://help.github.com/articles/creating-an-access-token-for-command-line-use/
+
+Setelah composer di install, jalankan perintah berikut di command prompt:
+   
+    rm -rf /path/to/yii-application/vendor/bower-asset
+    rm -rf /path/to/yii-application/vendor/bower
+    composer global require "fxp/composer-asset-plugin:1.1.0"
     composer install
 
 ## Preparing application
